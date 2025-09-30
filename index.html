@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vina - Beautiful Business Directories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .scalloped-wave-top {
+            mask: radial-gradient(26.76px at 50% -19.8px, rgb(0, 0, 0) 99%, rgba(0, 0, 0, 0) 101%) calc(50% - 36px) 0px / 72px 100%, 
+                  radial-gradient(26.76px at 50% 37.8px, rgba(0, 0, 0, 0) 99%, rgb(0, 0, 0) 101%) 50% -18px / 72px 100% repeat-x;
+            -webkit-mask: radial-gradient(26.76px at 50% 37.8px, rgb(0, 0, 0) 99%, rgba(0, 0, 0, 0) 101%) calc(50% - 36px) 0px / 72px 100%, 
+                  radial-gradient(26.76px at 50% -19.8px, rgba(0, 0, 0, 0) 99%, rgb(0, 0, 0) 101%) 50% 18px / 72px 100% repeat-x;
+        }
+
+        /* Header */
+        header {
+            padding: 32px 0;
+            background: #ffffff;
+            border-bottom: 1px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 48px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 400;
+            font-size: 16px;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .cta-button {
+            background: #1a1a1a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: opacity 0.2s ease;
+        }
+
+        .cta-button:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section - New Take */
+        .hero {
+            padding: 80px 0 120px;
+            background: #ffffff;
+            position: relative;
+        }
+        
+        .hero .container {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .hero-content-wrapper {
+            width: 55%;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 68px);
+            font-weight: 800;
+            margin-bottom: 28px;
+            line-height: 1.1;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .highlight {
+            background: linear-gradient(135deg, #fed7ca, #fdf2f8);
+            padding: 8px 16px;
+            border-radius: 12px;
+            color: #1a1a1a;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #666666;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+            padding: 18px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a1a1a;
+            padding: 18px 36px;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #1a1a1a;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Hero highlight callout */
+        .hero-highlight {
+            background: #fef7f0;
+            padding: 20px 28px;
+            border-radius: 12px;
+            border-left: 4px solid #fed7ca;
+            font-size: 16px;
+            color: #8b5a3c;
+            font-weight: 500;
+            margin-top: 32px;
+        }
+
+        .hero-image {
+            width: 45%;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Colorful Section Backgrounds */
+        .section-cream {
+            background: #fef7f0;
+            position: relative;
+            top: 150px;
+        }
+
+        .section-pink {
+            background: #fdf2f8;
+            position: relative;
+            top: 60px;
+        }
+
+        .section-orange {
+            background: #fff7ed;
+            position: relative;
+        }
+
+        .section-peach {
+            background: #fef3f2;
+            position: relative;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(40px, 8vw, 64px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 20px;
+            color: #666666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1;
+            color: #1a1a1a;
+        }
+
+        .feature-card p {
+            color: #666666;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Problem Section */
+        #problem {
+            position: relative;
+            top: 120px;
+            background-color: white;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .comparison-column h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 48px;
+            text-align: center;
+            color: #1a1a1a;
+        }
+
+        .comparison-items {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .comparison-item {
+            background: white;
+            padding: 24px 32px;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 16px;
+        }
+
+        .comparison-item.negative .icon {
+            color: #ef4444;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .comparison-item.positive .icon {
+            color: #10b981;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .comparison-item span:last-child {
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: #1a1a1a;
+            color: white;
+            position: relative;
+            top: 90px;
+        }
+
+        .services-section .section-header h2 {
+            color: white;
+        }
+
+        .services-section .section-header p {
+            color: #cccccc;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: transparent;
+            padding: 40px 32px;
+            border-radius: 8px;
+            border: 1px solid white;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .service-card:hover {
+            background: white;
+            color: #1a1a1a;
+        }
+
+        .service-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        .service-card:hover p {
+            opacity: 1;
+            color: #666666;
+        }
+
+        /* Difference Section */
+        .difference-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 80px;
+            align-items: flex-start;
+            margin-bottom: 120px;
+        }
+
+        .comparison-side h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+            color: #1a1a1a;
+        }
+
+        .comparison-image {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 32px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .comparison-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .comparison-points ul {
+            list-style: none;
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .comparison-points li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #666666;
+            font-weight: 400;
+        }
+
+        .old .comparison-points li:before {
+            content: "✗ ";
+            color: #ef4444;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        .new .comparison-points li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #1a1a1a;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 16px;
+            margin-top: 100px;
+        }
+
+        /* Wavy callout box */
+        .more-than-listing {
+            background: #fed7ca;
+            padding: 80px 60px;
+            border-radius: 20px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .listing-content h4 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .listing-content p {
+            color: #1a1a1a;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .listing-image img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #fee2e2;
+            text-align: center;
+            position: relative;
+            top: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 40px 32px;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-item p {
+            color: #666666;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .about-content p {
+            color: #666666;
+            margin-bottom: 24px;
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .about-images img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 64px;
+            color: #cccccc;
+        }
+
+        /* Form Styling */
+        .waitlist-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            background: white;
+            padding: 60px 50px;
+            border-radius: 8px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #1a1a1a;
+            border-radius: 6px;
+            background: white;
+            color: #1a1a1a;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .form-group input::placeholder {
+            color: #999999;
+        }
+
+        .btn-form-submit {
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-form-submit:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #f8f8f8;
+            color: #666666;
+            padding: 80px 0 40px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #666666;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+            font-size: 16px;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1a1a1a;
+            padding-top: 40px;
+            text-align: center;
+            color: #999999;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .hero {
+                padding: 60px 0 80px;
+            }
+            
+            .hero .container {
+                flex-direction: column;
+                gap: 48px;
+            }
+            
+            .hero-content-wrapper {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hero-image {
+                width: 100%;
+            }
+            
+            .comparison-grid,
+            .about-grid,
+            .difference-comparison,
+            .more-than-listing {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            
+            .vs-divider {
+                order: 2;
+                margin: 32px auto;
+            }
+            
+            .comparison-side.old {
+                order: 1;
+            }
+            
+            .comparison-side.new {
+                order: 3;
+            }
+            
+            .more-than-listing {
+                padding: 48px 32px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .form-container {
+                padding: 40px 32px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Vina</div>
+            <ul class="nav-links">
+                <li><a href="#what-is">Features</a></li>
+                <li><a href="#problem">Solution</a></li>
+                <li><a href="#services">Platform</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <a href="#waitlist" class="cta-button">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content-wrapper">
+                <h1>Turn Your Town's Hidden Gems into <span class="highlight">Everyone's</span> Favorites</h1>
+                <p>You know the best local spots. Vina helps you share that insider knowledge through beautiful business profiles that make discovery effortless for everyone.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#waitlist" class="btn-primary">Start Building</a>
+                    <a href="#what-is" class="btn-secondary">See How It Works</a>
+                </div>
+
+                <div class="hero-highlight">
+                    Transform local knowledge into lasting community connections
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://placehold.co/600x450/f8f8f8/1a1a1a?text=Community+Directory" alt="Community Directory Preview" />
+            </div>
+        </div>
+    </section>
+
+    <!-- What is Vina Section -->
+    <section id="what-is" class="section-cream scalloped-wave-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>What is Vina?</h2>
+                <p>A simple platform for creating beautiful business directories that actually work for small communities.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/></svg>
+                    </div>
+                    <h3>Chambers</h3>
+                    <p>love us because we make their local businesses shine. No technical skills required.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </div>
+                    <h3>Businesses</h3>
+                    <p>love us because we make it simple to have an updated website.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-1 16H9V7h9v14z"/></svg>
+                    </div>
+                    <h3>Community Members</h3>
+                    <p>love us because we help them support the small towns they love.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="scalloped-wave-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Problem</h2>
+                <p>Most business directories are outdated and don't work for small communities.</p>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-column">
+                    <h3>Current Reality</h3>
+                    <div class="comparison-items">
+                        <div class="comparison-item negative">
+                            <span class="icon">✗</span>
+                            <span>Facebook posts get buried</span>
+                        </div>
+                        <div class="comparison-item negative">
+                            <span class="icon">✗</span>
+                            <span>Yellow Pages are outdated</span>
+                        </div>
+                        <div class="comparison-item negative">
+                            <span class="icon">✗</span>
+                            <span>No online presence at all</span>
+                        </div>
+                        <div class="comparison-item negative">
+                            <span class="icon">✗</span>
+                            <span>Expensive website builders</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-column">
+                    <h3>With Vina</h3>
+                    <div class="comparison-items">
+                        <div class="comparison-item positive">
+                            <span class="icon">✓</span>
+                            <span>Professional business profiles</span>
+                        </div>
+                        <div class="comparison-item positive">
+                            <span class="icon">✓</span>
+                            <span>Mobile-friendly design</span>
+                        </div>
+                        <div class="comparison-item positive">
+                            <span class="icon">✓</span>
+                            <span>Easy to update</span>
+                        </div>
+                        <div class="comparison-item positive">
+                            <span class="icon">✓</span>
+                            <span>Affordable pricing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Offer Section -->
+    <section id="services" class="services-section scalloped-wave-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Offer</h2>
+                <p>Everything you need to create a successful business directory for your community.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4>Easy Listing</h4>
+                    <p>Simple business profiles with photos, hours, and contact info.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Custom Branding</h4>
+                    <p>Match your community's look and feel.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Smart Search</h4>
+                    <p>Customers find businesses quickly and easily.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Fast Loading</h4>
+                    <p>Works great on all devices and internet speeds.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Simple Dashboard</h4>
+                    <p>Track how your directory is performing.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Community Focus</h4>
+                    <p>Connect businesses with local customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- See the Difference Section -->
+    <section class="section-pink scalloped-wave-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>See the Difference</h2>
+                <p>From static PDFs to beautiful, searchable business showcases</p>
+            </div>
+
+            <div class="difference-comparison">
+                <div class="comparison-side old">
+                    <h3>Traditional Directories</h3>
+                    <div class="comparison-image">
+                        <img src="https://placehold.co/400x300/f8f8f8/ef4444?text=Static+PDFs" alt="Traditional directory example" />
+                    </div>
+                    <div class="comparison-points">
+                        <ul>
+                            <li>Static PDF lists</li>
+                            <li>Not mobile-friendly</li>
+                            <li>Basic contact info only</li>
+                            <li>No search features</li>
+                            <li>Hard to update</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="vs-divider">
+                    <span>VS</span>
+                </div>
+                
+                <div class="comparison-side new">
+                    <h3>Vina Experience</h3>
+                    <div class="comparison-image">
+                        <img src="https://placehold.co/400x300/f8f8f8/10b981?text=Modern+Directory" alt="Modern Vina directory" />
+                    </div>
+                    <div class="comparison-points">
+                        <ul>
+                            <li>Mobile-responsive</li>
+                            <li>Rich business profiles</li>
+                            <li>Easy search & filter</li>
+                            <li>Professional design</li>
+                            <li>Always up-to-date</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="more-than-listing">
+                <div class="listing-content">
+                    <h4>More Than a Listing</h4>
+                    <p>Each business gets their own professional webpage showcasing everything they offer. Help your local businesses compete with the big chains while keeping customers in your community.</p>
+                </div>
+                <div class="listing-image">
+                    <img src="https://placehold.co/500x350/f8f8f8/1a1a1a?text=Business+Web+Page" alt="Complete business web page example" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section scalloped-wave-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why This Matters</h2>
+                <p>Real results for communities using modern business directories</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>X%</h3>
+                    <p>More local business discovery</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Xx</h3>
+                    <p>Higher customer engagement</p>
+                </div>
+                <div class="stat-item">
+                    <h3>X%</h3>
+                    <p>Faster to set up</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Support when you need it</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="scalloped-wave-top">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Vina</h2>
+                <p>We're passionate about helping small communities thrive.</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-content">
+                    <h3>Our Mission</h3>
+                    <p>Small towns deserve the same tools as big cities. We make professional business directories accessible and affordable for every community.</p>
+                    <p>No technical expertise required. No hidden fees. Just a simple way to help your local businesses succeed online.</p>
+                    <p>Launch in minutes, not months. Get all the features you need at a price that makes sense for your community.</p>
+                </div>
+                <div class="about-images">
+                    <img src="https://placehold.co/350x250/f8f8f8/1a1a1a?text=Our+Team" alt="Team collaboration" />
+                    <img src="https://placehold.co/350x250/f8f8f8/1a1a1a?text=Small+Towns" alt="Small town focus" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="waitlist" class="cta-section scalloped-wave-top">
+        <div class="container">
+            <h2>Join the Waitlist</h2>
+            <p>Be first to get early access and special pricing for your community.</p>
+            
+            <div class="waitlist-form">
+                <form class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="organization">Organization/Community</label>
+                        <input type="text" id="organization" name="organization" placeholder="Your organization name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="useCase">How will you use Vina?</label>
+                        <select id="useCase" name="useCase">
+                            <option value="">Select an option</option>
+                            <option value="local-business">Local Business Directory</option>
+                            <option value="chamber-commerce">Chamber of Commerce</option>
+                            <option value="community-org">Community Organization</option>
+                            <option value="tourism">Tourism/Visitor Bureau</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-form-submit">Join the Waitlist</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Vina</h4>
+                    <p style="color: #999999; margin-top: 12px; font-size: 14px;">Beautiful business directories for small communities.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Templates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vina. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
